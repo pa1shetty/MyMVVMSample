@@ -9,7 +9,7 @@ class AuthViewModelFactory(
     private val application: Application,
  private val  repository: UserRepository
 ) :ViewModelProvider.NewInstanceFactory(){
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return AuthViewModel(application,repository) as T
     }
 }
