@@ -1,10 +1,10 @@
 package com.example.mymvvmsample.ui.auth
 
-import androidx.lifecycle.LiveData
+import com.example.mymvvmsample.data.db.entites.User
 
 
 interface AuthListener {
 fun onStarted()
-fun onSuccess(loginResponse: LiveData<String>)
+fun onSuccess(user: User)
 fun onFailure(message: String)
 }
