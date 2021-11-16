@@ -12,9 +12,19 @@ import retrofit2.http.POST
 interface MyApi {
 
     @FormUrlEncoded
-    @POST("test")
+    @POST("signup")
+    suspend fun userSignup(
+        @Field(nameLbl) name: String,
+        @Field(emailLbl) email: String,
+        @Field(passwordLbl) pass: String
+    ): Response<AuthResponse>
+
+
+    @FormUrlEncoded
+    @POST("login")
     suspend fun useLogin(
-        @Field("email") email: String, @Field("password") pass: String
+        @Field(emailLbl) email: String,
+        @Field(passwordLbl) pass: String
     ): Response<AuthResponse>
 
     companion object {
@@ -26,7 +36,7 @@ interface MyApi {
                 .build()
             return Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://purple.mocklab.io/")
+                .baseUrl(baseUrlLbl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(MyApi::class.java)
         }

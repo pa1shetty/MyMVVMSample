@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.mymvvmsample.R
 import com.example.mymvvmsample.data.db.entites.User
@@ -34,10 +33,14 @@ class LoginActivity() : AppCompatActivity(), AuthListener, KodeinAware {
             if (user != null) {
                 Intent(this, HomeActivity::class.java).also {
                     it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(it);
+                    startActivity(it)
                 }
             }
         })
+
+        binding.textViewSignUp.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
+        }
         binding.viewModel = authViewModel
         authViewModel.authListener = this
         binding.buttonSignIn.setOnClickListener { authViewModel.onLoginButtonClick() }
